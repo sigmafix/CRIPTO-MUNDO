@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Cripto: A Nova Economia Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CRIPTOPÉDIA</a>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="historia.html">História</a></li>
+                <li><a href="tecnologia.html">Tecnologia</a></li>
+                <li><a href="cultura.html">Cultura</a></li>
+                <li><a href="economia.html">Economia</a></li>
+                <li><a href="futuro.html">Futuro</a></li>
+            </ul>
+        </nav>
+        <button id="menu-btn" aria-label="Abrir menu">
+            <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <h1>Criptomoedas: A Nova Economia Digital</h1>
+            <p>Uma jornada completa pelo universo das criptomoedas, desde sua criação com o Bitcoin até o futuro descentralizado da Web3.</p>
+            <p>Navegue pelas seções acima para explorar a história, a tecnologia, a cultura e o impacto econômico deste novo mundo.</p>
+        </section>
+
+        <h2>Sobre o Projeto</h2>
+        <p>Assim como o Egito Antigo foi construído sobre o Nilo, o mundo das criptomoedas é construído sobre a tecnologia blockchain. Este projeto explora as fundações, a cultura, a economia e o futuro deste novo território digital, usando uma estrutura inspirada no estudo de grandes civilizações.</p>
+    </main>
+
+    <section id="crypto-list">
+        <h2>Principais Criptomoedas</h2>
+        <div id="crypto-grid" class="crypto-grid">
+            <!-- Os cards de criptomoedas serão inseridos aqui pelo JavaScript -->
+            <p>Carregando dados...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Projeto Cripto. Todos os direitos reservados.</p>
+    </footer>
+
+    <button id="back-to-top" title="Voltar ao topo">&#9650;</button>
+
+    <script>
+        // Lógica para buscar dados das criptomoedas e popular os cards
+        async function fetchCryptoData() {
+            const grid = document.getElementById('crypto-grid');
+            try {
+                // Busca os dados das principais criptomoedas em Dólar (USD)
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false');
+                const coins = await response.json();
+
+                // Busca a taxa de conversão de USD para BRL
+                const rateResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl,usd');
+                const rateData = await rateResponse.json();
+                const usdToBrlRate = rateData.bitcoin.brl / rateData.bitcoin.usd;
+
+                grid.innerHTML = ''; // Limpa a mensagem de "Carregando"
+
+                coins.forEach(coin => {
+                    const priceUsd = coin.current_price;
+                    const priceBrl = priceUsd * usdToBrlRate;
+
+                    const card = document.createElement('div');
+                    card.className = 'crypto-card';
+                    card.innerHTML = `
+                        <img src="${coin.image}" alt="Logo ${coin.name}">
+                        <h3>${coin.name}</h3>
+                        <p class="price-usd">US$ ${priceUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                        <p class="price-brl">R$ ${priceBrl.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (error) {
+                grid.innerHTML = '<p>Não foi possível carregar os dados das criptomoedas. Tente novamente mais tarde.</p>';
+                console.error('Erro ao buscar dados da API:', error);
+            }
+        }
+
+        // Lógica do botão "Voltar ao Topo"
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        backToTopButton.onclick = function() {
+            document.body.scrollTop = 0; // Para Safari
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+        };
+
+        // Chama a função para buscar os dados quando a página carregar
+        document.addEventListener('DOMContentLoaded', fetchCryptoData);
+
+        // Lógica do Menu Hamburger
+        const menuBtn = document.getElementById('menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        menuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuBtn.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

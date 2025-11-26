@@ -1,0 +1,281 @@
+/* --- Reset Básico e Definições Globais --- */
+:root {
+    --primary-color: #0d1117; /* Cor de fundo principal (GitHub Dark) */
+    --secondary-color: #161b22; /* Cor de fundo secundária */
+    --border-color: #30363d; /* Cor da borda */
+    --text-color: #c9d1d9; /* Cor do texto principal */
+    --link-color: #58a6ff; /* Cor dos links */
+    --header-color: #f0b90b; /* Cor de destaque (Amarelo Binance) */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--header-color);
+    text-decoration: none;
+}
+
+header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+header nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover, header nav a.active {
+    color: var(--header-color);
+}
+
+/* --- Conteúdo Principal --- */
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+h1, h2, h3 {
+    color: var(--header-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    border-bottom: none;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+strong {
+    color: var(--header-color);
+}
+
+/* --- Seção de Boas-Vindas (index.html) --- */
+.welcome-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.welcome-section h1 {
+    border-bottom: none;
+    font-size: 3rem;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 1rem auto;
+}
+
+/* --- Rodapé --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    color: #8b949e; /* Cor de texto mais suave */
+}
+
+/* --- Seção de Criptomoedas --- */
+#crypto-list {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.crypto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.crypto-card {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.crypto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.crypto-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.crypto-card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+    border-bottom: none;
+}
+
+.crypto-card .price-usd {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.crypto-card .price-brl {
+    font-size: 1rem;
+    color: #8b949e;
+    margin: 0.25rem 0 0 0;
+}
+
+/* --- Botão Voltar ao Topo --- */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--header-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 12px 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#back-to-top:hover {
+    background-color: #ffdd82; /* Um amarelo mais claro para o hover */
+}
+
+/* --- Menu Hamburger e Responsividade --- */
+#menu-btn {
+    display: none; /* Escondido em telas grandes */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animação do botão para 'X' */
+#menu-btn.open .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+#menu-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+#menu-btn.open .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* Media Query para telas menores (ex: celulares) */
+@media (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    header nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Começa fora da tela */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--secondary-color);
+        padding-top: 6rem;
+        transition: right 0.4s ease-in-out;
+        border-left: 1px solid var(--border-color);
+    }
+
+    header nav.active {
+        right: 0; /* Puxa o menu para dentro da tela */
+    }
+
+    header nav a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    #menu-btn {
+        display: block; /* Mostra o botão em telas pequenas */
+    }
+}
+}
